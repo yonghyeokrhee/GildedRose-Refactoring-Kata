@@ -16,6 +16,8 @@ public class Item {
 
     void updateItem() {
         boolean isAgedBrie = name.equals("Aged Brie");
+        boolean isBackstagePass = name.equals("Backstage passes to a TAFKAL80ETC concert");
+
         if (isAgedBrie) {
             if (quality < 50) {
                 quality = quality + 1;
@@ -30,13 +32,7 @@ public class Item {
                 }
             }
         } else {
-            if (!name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (quality > 0) {
-                    if (!name.equals("Sulfuras, Hand of Ragnaros")) {
-                        quality = quality - 1;
-                    }
-                }
-            } else {
+            if (isBackstagePass) {
                 if (quality < 50) {
                     quality = quality + 1;
 
@@ -52,21 +48,29 @@ public class Item {
                         }
                     }
                 }
-            }
 
-            if (!name.equals("Sulfuras, Hand of Ragnaros")) {
                 sellIn = sellIn - 1;
-            }
 
-            if (sellIn < 0) {
-                if (!name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (sellIn < 0) {
+                    quality = 0;
+                }
+            } else {
+                if (quality > 0) {
+                    if (!name.equals("Sulfuras, Hand of Ragnaros")) {
+                        quality = quality - 1;
+                    }
+                }
+
+                if (!name.equals("Sulfuras, Hand of Ragnaros")) {
+                    sellIn = sellIn - 1;
+                }
+
+                if (sellIn < 0) {
                     if (quality > 0) {
                         if (!name.equals("Sulfuras, Hand of Ragnaros")) {
                             quality = quality - 1;
                         }
                     }
-                } else {
-                    quality = 0;
                 }
             }
         }
